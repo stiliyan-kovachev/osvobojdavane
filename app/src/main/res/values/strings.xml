@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Phonebook</string>
+    <string name="app_name">CarsSale</string>
     <string name="title_activity_add_contact">AddContactActivity</string>
     <string name="title_activity_view_contact">ViewContactActivity</string>
 
@@ -49,5 +49,6 @@
     <string name="title_activity_add">AddActivity</string>
     <string name="title_activity_view_sales">ViewSalesActivity</string>
     <string name="title_activity_edit_sale">EditSaleActivity</string>
+    <string name="title_activity_inquiries">InquiriesActivity</string>
 
 </resources>

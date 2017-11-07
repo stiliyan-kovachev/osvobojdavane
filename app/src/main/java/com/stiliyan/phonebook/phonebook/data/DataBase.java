@@ -142,6 +142,50 @@ public class DataBase extends SQLiteOpenHelper {
 
     }
 
+    public  Cursor saledCarsFromCustomerOrdered( int customerId ){
+        open();
+        Cursor cursor = db.rawQuery( "select " + car_id +"," + key_brand +"," + key_model + "," + key_year + "," + key_color + "," + key_kilometers + "," +key_price +
+                " from " +sale_table_name +
+                " inner join " +customer_table_name +" on " + sale_table_name +"."  + customer_id + " = "+customer_table_name +"." + customer_id +
+                " inner join " +car_table_name +" on " + sale_table_name +"."  + car_id + " = "+car_table_name +"." + car_id +
+                ";" + " where " + customer_id + " = " + customerId + ";" + " order by " + key_saledate + "ask;", null );
+
+        return  cursor;
+    }
+
+    public  Cursor lastFiveSalesOrderedByPrice(){
+        open();
+        Cursor cursor = db.rawQuery( "select " + "*" + " from " +sale_table_name +
+                " inner join " +client_table_name +" on " + sale_table_name +"."  + client_id + " = "+client_table_name +"." + client_id +
+                " inner join " +customer_table_name +" on " + sale_table_name +"."  + customer_id + " = "+customer_table_name +"." + customer_id +
+                " inner join " +car_table_name +" on " + sale_table_name +"."  + car_id + " = "+car_table_name +"." + car_id +
+                ";" + " order by " + key_price + "ask;" + " limit 10;", null );
+
+        return  cursor;
+    }
+
+    public  Cursor boughtCarsByClient( int clientId ){
+        open();
+        Cursor cursor = db.rawQuery( "select " + car_id +"," + key_brand +"," + key_model + "," + key_year + "," + key_color + "," + key_kilometers + "," +key_price +
+                " from " +sale_table_name +
+                " inner join " +client_table_name +" on " + sale_table_name +"."  + client_id + " = "+client_table_name +"." + client_id +
+                " inner join " +car_table_name +" on " + sale_table_name +"."  + car_id + " = "+car_table_name +"." + car_id +
+                ";" + " where " + client_id + " = " + clientId + ";" , null );
+
+        return  cursor;
+    }
+
+    public  Cursor salesForPeriod( int from, int to ){
+        open();
+        Cursor cursor = db.rawQuery( "select " + "*" + " from " +sale_table_name +
+                " inner join " +client_table_name +" on " + sale_table_name +"."  + client_id + " = "+client_table_name +"." + client_id +
+                " inner join " +customer_table_name +" on " + sale_table_name +"."  + customer_id + " = "+customer_table_name +"." + customer_id +
+                " inner join " +car_table_name +" on " + sale_table_name +"."  + car_id + " = "+car_table_name +"." + car_id +
+                ";" + " order by " + key_saledate + " between " + from + " and " + to + ";", null );
+
+        return  cursor;
+    }
+
     public void deleteSale( int id )
     {
         open();

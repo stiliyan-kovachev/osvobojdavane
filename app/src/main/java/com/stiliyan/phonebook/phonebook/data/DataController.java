@@ -207,4 +207,132 @@ public class DataController {
 
         return sale;
     }
+
+    public List<CarVO> saledCarsFromCustomerOrdered( int customerId ){
+        List<CarVO> models = new ArrayList<>();
+
+        Cursor c = db.saledCarsFromCustomerOrdered(customerId );
+        if ( c.moveToFirst() )
+            do {
+                CarVO model = new CarVO();
+                model.id = c.getInt(c.getColumnIndex(DataBase.car_id));
+                model.brand = c.getString(c.getColumnIndex(DataBase.key_brand));
+                model.model = c.getString(c.getColumnIndex(DataBase.key_model));
+                model.year = c.getInt(c.getColumnIndex(DataBase.key_year));
+                model.color = c.getString(c.getColumnIndex(DataBase.key_color));
+                model.kilometers = c.getInt(c.getColumnIndex(DataBase.key_kilometers));
+                model.price = c.getInt(c.getColumnIndex(DataBase.key_price));
+
+                models.add(model);
+            }
+            while (c.moveToNext() );
+        db.close();
+
+        return models;
+    }
+
+    public List<CarVO> boughtCarsByClient( int clientId ){
+        List<CarVO> models = new ArrayList<>();
+
+        Cursor c = db.boughtCarsByClient(clientId );
+        if ( c.moveToFirst() )
+            do {
+                CarVO model = new CarVO();
+                model.id = c.getInt(c.getColumnIndex(DataBase.car_id));
+                model.brand = c.getString(c.getColumnIndex(DataBase.key_brand));
+                model.model = c.getString(c.getColumnIndex(DataBase.key_model));
+                model.year = c.getInt(c.getColumnIndex(DataBase.key_year));
+                model.color = c.getString(c.getColumnIndex(DataBase.key_color));
+                model.kilometers = c.getInt(c.getColumnIndex(DataBase.key_kilometers));
+                model.price = c.getInt(c.getColumnIndex(DataBase.key_price));
+
+                models.add(model);
+            }
+            while (c.moveToNext() );
+        db.close();
+
+        return models;
+    }
+
+    public List<SaleVO> lastFiveSalesOrderedByPrice(){
+        List<SaleVO> models = new ArrayList<>();
+        Cursor c = db.lastFiveSalesOrderedByPrice();
+
+        if ( c.moveToFirst() )
+            do {
+
+                SaleVO model = new SaleVO();
+                model.id =  ( c.getInt(c.getColumnIndex( DataBase.client_id) ) );
+                model.saledate = new Date( ( c.getInt(c.getColumnIndex( DataBase.key_saledate) ) ) );
+
+                model.client = new ClientVO();
+                model.client.id = ( c.getInt(c.getColumnIndex( DataBase.client_id ) ) );
+                model.client.name = ( c.getString(c.getColumnIndex( DataBase.key_client_name ) ) );
+                model.client.address = ( c.getString(c.getColumnIndex( DataBase.key_address ) ) );
+                model.client.phone = ( c.getString(c.getColumnIndex( DataBase.key_client_phone ) ) );
+
+                model.customer = new CustomerVO();
+                model.customer.id = ( c.getInt(c.getColumnIndex( DataBase.customer_id ) ) );
+                model.customer.name = ( c.getString(c.getColumnIndex( DataBase.key_customer_name ) ) );
+                model.customer.phone = ( c.getString(c.getColumnIndex( DataBase.key_customer_phone ) ) );
+                model.customer.position = ( c.getString(c.getColumnIndex( DataBase.key_position ) ) );
+
+                model.car = new CarVO();
+                model.car.id = ( c.getInt(c.getColumnIndex( DataBase.car_id ) ) );
+                model.car.brand = ( c.getString(c.getColumnIndex( DataBase.key_brand ) ) );
+                model.car.model = ( c.getString(c.getColumnIndex( DataBase.key_model ) ) );
+                model.car.year = ( c.getInt(c.getColumnIndex( DataBase.key_year ) ) );
+                model.car.color = ( c.getString(c.getColumnIndex( DataBase.key_color ) ) );
+                model.car.kilometers = ( c.getInt(c.getColumnIndex( DataBase.key_kilometers ) ) );
+                model.car.price = ( c.getInt(c.getColumnIndex( DataBase.key_price ) ) );
+
+                models.add( model);
+            }
+            while ( c.moveToNext() );
+
+        db.close();
+
+        return models;
+    }
+
+    public List<SaleVO> salesForPeriod( int from, int to ){
+        List<SaleVO> models = new ArrayList<>();
+        Cursor c = db.salesForPeriod( from, to );
+
+        if ( c.moveToFirst() )
+            do {
+
+                SaleVO model = new SaleVO();
+                model.id =  ( c.getInt(c.getColumnIndex( DataBase.client_id) ) );
+                model.saledate = new Date( ( c.getInt(c.getColumnIndex( DataBase.key_saledate) ) ) );
+
+                model.client = new ClientVO();
+                model.client.id = ( c.getInt(c.getColumnIndex( DataBase.client_id ) ) );
+                model.client.name = ( c.getString(c.getColumnIndex( DataBase.key_client_name ) ) );
+                model.client.address = ( c.getString(c.getColumnIndex( DataBase.key_address ) ) );
+                model.client.phone = ( c.getString(c.getColumnIndex( DataBase.key_client_phone ) ) );
+
+                model.customer = new CustomerVO();
+                model.customer.id = ( c.getInt(c.getColumnIndex( DataBase.customer_id ) ) );
+                model.customer.name = ( c.getString(c.getColumnIndex( DataBase.key_customer_name ) ) );
+                model.customer.phone = ( c.getString(c.getColumnIndex( DataBase.key_customer_phone ) ) );
+                model.customer.position = ( c.getString(c.getColumnIndex( DataBase.key_position ) ) );
+
+                model.car = new CarVO();
+                model.car.id = ( c.getInt(c.getColumnIndex( DataBase.car_id ) ) );
+                model.car.brand = ( c.getString(c.getColumnIndex( DataBase.key_brand ) ) );
+                model.car.model = ( c.getString(c.getColumnIndex( DataBase.key_model ) ) );
+                model.car.year = ( c.getInt(c.getColumnIndex( DataBase.key_year ) ) );
+                model.car.color = ( c.getString(c.getColumnIndex( DataBase.key_color ) ) );
+                model.car.kilometers = ( c.getInt(c.getColumnIndex( DataBase.key_kilometers ) ) );
+                model.car.price = ( c.getInt(c.getColumnIndex( DataBase.key_price ) ) );
+
+                models.add( model);
+            }
+            while ( c.moveToNext() );
+
+        db.close();
+
+        return models;
+    }
 }

@@ -40,6 +40,10 @@
         <activity
             android:name=".EditSaleActivity"
             android:label="@string/title_activity_edit_sale"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".InquiriesActivity"
+            android:label="@string/title_activity_inquiries"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
