@@ -48,5 +48,6 @@
     <string name="title_activity_add_caractivity">AddCaractivity</string>
     <string name="title_activity_add">AddActivity</string>
     <string name="title_activity_view_sales">ViewSalesActivity</string>
+    <string name="title_activity_edit_sale">EditSaleActivity</string>
 
 </resources>

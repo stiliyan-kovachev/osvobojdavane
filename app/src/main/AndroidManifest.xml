@@ -36,6 +36,10 @@
         <activity
             android:name=".ViewSalesActivity"
             android:label="@string/title_activity_view_sales"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".EditSaleActivity"
+            android:label="@string/title_activity_edit_sale"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

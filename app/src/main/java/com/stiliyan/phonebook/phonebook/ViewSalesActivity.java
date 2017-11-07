@@ -2,11 +2,9 @@ package com.stiliyan.phonebook.phonebook;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -14,6 +12,8 @@ import android.widget.ListView;
 import com.stiliyan.phonebook.phonebook.adapter.ContactListAdapter;
 import com.stiliyan.phonebook.phonebook.data.DataController;
 import com.stiliyan.phonebook.phonebook.data.SaleVO;
+import com.stiliyan.phonebook.phonebook.utils.Consts;
+import com.stiliyan.phonebook.phonebook.utils.RequestCodes;
 
 import java.util.List;
 
@@ -30,19 +30,6 @@ public class ViewSalesActivity extends AppCompatActivity {
         salesList = (ListView) findViewById( R.id.salesList );
 
         DataController.getInstance().setContext( this );
-       /* if ( !DataController.getInstance().hasCountries() )
-        {
-            String[] countries = getResources().getStringArray(R.array.countries);
-            String[] codes = getResources().getStringArray(R.array.country_codes);
-            for ( int i = 0; i < countries.length; i++ )
-            {
-                CountryVO country = new CountryVO();
-                country.country_name = countries[i];
-                country.code = codes[i];
-
-                DataController.getInstance().addCountry( country );
-            }
-        }*/
         salesData = DataController.getInstance().getAllSales();
 
         contactListAdapter = new ContactListAdapter( this, R.layout.contact_list_item_renderer, salesData );
@@ -62,13 +49,13 @@ public class ViewSalesActivity extends AppCompatActivity {
 
                     public void onClick(DialogInterface dialog, int item) {
                         SaleVO model = ( SaleVO ) salesList.getItemAtPosition( i );
-                        /*if( item == 0 )
+                        if( item == 0 )
                         {
-                            Intent intent = new Intent( MainActivity.this, EditContactActivity.class );
+                            Intent intent = new Intent( ViewSalesActivity.this, EditSaleActivity.class );
                             intent.putExtra( Consts.ID, model.id );
-                            startActivityForResult( intent, RequestCodes.CREATE_EDIT_CONTACT_REQUEST_CODE );
+                            startActivityForResult( intent, RequestCodes.CREATE_EDIT_SALE_REQUEST_CODE);
                         }
-                        else*/
+                        else
                         if ( item == 1 ) {
                             DataController.getInstance().deleteSale( model.id );
                             updateList();
@@ -85,6 +72,16 @@ public class ViewSalesActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (requestCode == 1) {
+            if(resultCode ==  RequestCodes.CREATE_EDIT_SALE_REQUEST_CODE){
+                updateList();
+            }
+        }
     }
 
     private void updateList()

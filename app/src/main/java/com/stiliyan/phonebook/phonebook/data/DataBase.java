@@ -126,6 +126,22 @@ public class DataBase extends SQLiteOpenHelper {
 
     }
 
+    public Cursor getSaleById( int id )
+    {
+        open();
+
+        Cursor cursor = db.rawQuery( "select " + "*" + " from " +sale_table_name +
+                " inner join " +client_table_name +" on " + sale_table_name +"."  + client_id + " = "+client_table_name +"." + client_id +
+                " inner join " +customer_table_name +" on " + sale_table_name +"."  + customer_id + " = "+customer_table_name +"." + customer_id +
+                " inner join " +car_table_name +" on " + sale_table_name +"."  + car_id + " = "+car_table_name +"." + car_id +
+                ";" + " where " + sale_id + " = " + id + ";", null );
+
+//        close();
+
+        return  cursor;
+
+    }
+
     public void deleteSale( int id )
     {
         open();
@@ -133,15 +149,6 @@ public class DataBase extends SQLiteOpenHelper {
 //        db.rawQuery("delete from " + client_table_name + " " + "where " + key_id + " = '" + id + "'", null );
         db.delete(sale_table_name, sale_id + "=" + id, null );
         close();
-    }
-
-    public Cursor getSaleById( int id )
-    {
-        open();
-
-        Cursor cursor = db.rawQuery( "select " + "*" + " from " +sale_table_name + " " + "inner join " +customer_table_name +" on " + sale_table_name +"."  + client_id + " = "+client_table_name +"." + client_id +";", null );
-        return  cursor;
-
     }
 
     public boolean hasoCountries()

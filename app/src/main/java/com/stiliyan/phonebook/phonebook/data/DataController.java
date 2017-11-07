@@ -170,4 +170,41 @@ public class DataController {
         values.put( DataBase.key_saledate, vo.saledate.getTime());
         db.addSale( values );
     }
+
+    public SaleVO getSaleById(int saleID) {
+        SaleVO sale = new SaleVO();
+
+        Cursor c = db.getSaleById( saleID );
+        if ( c.moveToFirst() )
+            do {
+                sale.id =  ( c.getInt(c.getColumnIndex( DataBase.client_id) ) );
+                sale.saledate = new Date( ( c.getInt(c.getColumnIndex( DataBase.key_saledate) ) ) );
+
+                sale.client = new ClientVO();
+                sale.client.id = ( c.getInt(c.getColumnIndex( DataBase.client_id ) ) );
+                sale.client.name = ( c.getString(c.getColumnIndex( DataBase.key_client_name ) ) );
+                sale.client.address = ( c.getString(c.getColumnIndex( DataBase.key_address ) ) );
+                sale.client.phone = ( c.getString(c.getColumnIndex( DataBase.key_client_phone ) ) );
+
+                sale.customer = new CustomerVO();
+                sale.customer.id = ( c.getInt(c.getColumnIndex( DataBase.customer_id ) ) );
+                sale.customer.name = ( c.getString(c.getColumnIndex( DataBase.key_customer_name ) ) );
+                sale.customer.phone = ( c.getString(c.getColumnIndex( DataBase.key_customer_phone ) ) );
+                sale.customer.position = ( c.getString(c.getColumnIndex( DataBase.key_position ) ) );
+
+                sale.car = new CarVO();
+                sale.car.id = ( c.getInt(c.getColumnIndex( DataBase.car_id ) ) );
+                sale.car.brand = ( c.getString(c.getColumnIndex( DataBase.key_brand ) ) );
+                sale.car.model = ( c.getString(c.getColumnIndex( DataBase.key_model ) ) );
+                sale.car.year = ( c.getInt(c.getColumnIndex( DataBase.key_year ) ) );
+                sale.car.color = ( c.getString(c.getColumnIndex( DataBase.key_color ) ) );
+                sale.car.kilometers = ( c.getInt(c.getColumnIndex( DataBase.key_kilometers ) ) );
+                sale.car.price = ( c.getInt(c.getColumnIndex( DataBase.key_price ) ) );
+            }
+            while ( c.moveToNext() );
+
+        db.close();
+
+        return sale;
+    }
 }
