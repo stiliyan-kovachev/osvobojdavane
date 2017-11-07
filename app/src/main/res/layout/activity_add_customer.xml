@@ -13,40 +13,40 @@
         android:id="@+id/name"
         android:hint="@string/name"/>
 
-    <Spinner
-        android:id="@+id/spinCountry"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </Spinner>
+    <!--  <Spinner
+          android:id="@+id/spinCountry"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content">
+      </Spinner>-->
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    <!-- <LinearLayout
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content">
 
-        <Spinner
-            android:id="@+id/spinCode"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-        </Spinner>
-
-        <EditText
-            android:id="@+id/phone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/phone"/>
-    </LinearLayout>
+         <Spinner
+             android:id="@+id/spinCode"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content">
+         </Spinner>-->
 
     <EditText
-        android:id="@+id/email"
+        android:id="@+id/phone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/email"/>
+        android:hint="@string/phone"/>
+    <!--</LinearLayout>-->
 
-    <Spinner
-        android:id="@+id/spinGender"
+    <EditText
+        android:id="@+id/position"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </Spinner>
+        android:layout_height="wrap_content"
+        android:hint="position"/>
+
+    <!--    <Spinner
+            android:id="@+id/spinGender"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </Spinner>-->
 
 
     <Button

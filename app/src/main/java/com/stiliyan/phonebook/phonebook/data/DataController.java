@@ -5,6 +5,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class DataController {
@@ -27,58 +28,97 @@ public class DataController {
         db = new DataBase( context );
     }
 
-    public void addContact( ContactVO contact ) {
-        ContentValues contentValues = new ContentValues();
-        contentValues.put( DataBase.key_name, contact.name );
-        contentValues.put( DataBase.key_email, contact.email );
-        contentValues.put( DataBase.key_country_id, contact.country.id );
-        contentValues.put( DataBase.key_phone, contact.phone );
-        contentValues.put( DataBase.key_gender, contact.gender );
+    public List<ClientVO> getClients() {
+        Cursor c = db.getAllClients();
+        List<ClientVO> clients = new ArrayList<ClientVO>();
+        if ( c.moveToFirst() )
+            do {
+                ClientVO client = new ClientVO();
+                client.id = c.getInt(c.getColumnIndex(DataBase.client_id));
+                client.name = c.getString(c.getColumnIndex(DataBase.key_client_name));
+//                client.address = c.getString(c.getColumnIndex(DataBase.key_address));
+//                client.phone = c.getString(c.getColumnIndex(DataBase.key_client_phone));
+                clients.add(client);
+            }
+            while (c.moveToNext() );
+        db.close();
 
-        db.addContact( contentValues );
+        return clients;
+    }
+    public List<CustomerVO> getCustomers() {
+        Cursor c = db.getAllCustomers();
+        List<CustomerVO> clients = new ArrayList<CustomerVO>();
+        if ( c.moveToFirst() )
+            do {
+                CustomerVO client = new CustomerVO();
+                client.id = c.getInt(c.getColumnIndex(DataBase.customer_id));
+                client.name = c.getString(c.getColumnIndex(DataBase.key_customer_name));
+                clients.add(client);
+            }
+            while (c.moveToNext() );
+        db.close();
+
+        return clients;
+    }
+    public List<CarVO> getCars() {
+        Cursor c = db.getAllCars();
+        List<CarVO> clients = new ArrayList<CarVO>();
+        if ( c.moveToFirst() )
+            do {
+                CarVO client = new CarVO();
+                client.id = c.getInt(c.getColumnIndex(DataBase.car_id));
+                client.brand = c.getString(c.getColumnIndex(DataBase.key_brand));
+                clients.add(client);
+            }
+            while (c.moveToNext() );
+        db.close();
+
+        return clients;
     }
 
-    public void updateContact( ContactVO contact ) {
+    public void updateSale( SaleVO sale ) {
 
-        ContentValues contentValues = new ContentValues();
-        contentValues.put( DataBase.key_name, contact.name );
-        contentValues.put( DataBase.key_email, contact.email );
-        contentValues.put( DataBase.key_country_id, contact.country.id );
-        contentValues.put( DataBase.key_phone, contact.phone );
-        contentValues.put( DataBase.key_gender, contact.gender );
+        ContentValues values = new ContentValues();
+//        values.put( DataBase.sale_id, sale.id );
+        values.put( DataBase.client_id, sale.client.id );
+        values.put( DataBase.customer_id, sale.customer.id );
+        values.put( DataBase.car_id, sale.car.id );
+        values.put( DataBase.key_saledate, sale.saledate.getTime() );
 
-        db.updateContact( contact.id, contentValues );
+        db.updateSale( sale.id, values );
     }
 
-    public void addCountry( CountryVO country ) {
-        ContentValues contentValues = new ContentValues();
-        contentValues.put( DataBase.key_country, country.country_name );
-        contentValues.put( DataBase.key_code, country.code );
+    public List<SaleVO> getAllSales() {
+        List<SaleVO> allContacts = new ArrayList<>();
 
-        db.addCountry( contentValues );
-    }
-
-    public boolean hasCountries() {
-        return  db.hasoCountries();
-    }
-
-    public List<ContactVO> getAllContacts() {
-        List<ContactVO> allContacts = new ArrayList<>();
-
-        Cursor c = db.getAllContacts();
+        Cursor c = db.getAllSales();
         if ( c.moveToFirst() )
             do {
 
-                ContactVO model = new ContactVO();
-                model.id =  ( c.getInt(c.getColumnIndex( DataBase.key_contact_id ) ) );
-                model.name = ( c.getString(c.getColumnIndex( DataBase.key_name ) ) );
-                model.phone = ( c.getString(c.getColumnIndex( DataBase.key_phone ) ) );
+                SaleVO model = new SaleVO();
+                model.id =  ( c.getInt(c.getColumnIndex( DataBase.client_id) ) );
+                model.saledate = new Date( ( c.getInt(c.getColumnIndex( DataBase.key_saledate) ) ) );
 
-                Cursor cr = db.getCountryById( model.country.id );
-                if ( cr.moveToFirst() ) {
-                    model.country.code = cr.getString(cr.getColumnIndex(DataBase.key_code));
-                    model.country.country_name = cr.getString(cr.getColumnIndex(DataBase.key_country));
-                }
+                model.client = new ClientVO();
+                model.client.id = ( c.getInt(c.getColumnIndex( DataBase.client_id ) ) );
+                model.client.name = ( c.getString(c.getColumnIndex( DataBase.key_client_name ) ) );
+                model.client.address = ( c.getString(c.getColumnIndex( DataBase.key_address ) ) );
+                model.client.phone = ( c.getString(c.getColumnIndex( DataBase.key_client_phone ) ) );
+
+                model.customer = new CustomerVO();
+                model.customer.id = ( c.getInt(c.getColumnIndex( DataBase.customer_id ) ) );
+                model.customer.name = ( c.getString(c.getColumnIndex( DataBase.key_customer_name ) ) );
+                model.customer.phone = ( c.getString(c.getColumnIndex( DataBase.key_customer_phone ) ) );
+                model.customer.position = ( c.getString(c.getColumnIndex( DataBase.key_position ) ) );
+
+                model.car = new CarVO();
+                model.car.id = ( c.getInt(c.getColumnIndex( DataBase.car_id ) ) );
+                model.car.brand = ( c.getString(c.getColumnIndex( DataBase.key_brand ) ) );
+                model.car.model = ( c.getString(c.getColumnIndex( DataBase.key_model ) ) );
+                model.car.year = ( c.getInt(c.getColumnIndex( DataBase.key_year ) ) );
+                model.car.color = ( c.getString(c.getColumnIndex( DataBase.key_color ) ) );
+                model.car.kilometers = ( c.getInt(c.getColumnIndex( DataBase.key_kilometers ) ) );
+                model.car.price = ( c.getInt(c.getColumnIndex( DataBase.key_price ) ) );
 
                 allContacts.add( model);
             }
@@ -89,53 +129,45 @@ public class DataController {
         return allContacts;
     }
 
-    public List<CountryVO> getAllCountries() {
-        List<CountryVO> allContacts = new ArrayList<>();
 
-        Cursor c = db.getAllCountries();
-        if ( c.moveToFirst() )
-            do {
-
-                CountryVO model = new CountryVO();
-                model.id =  ( c.getInt(c.getColumnIndex( DataBase.key_country_id ) ) );
-                model.country_name = ( c.getString(c.getColumnIndex( DataBase.key_country ) ) );
-                model.code = ( c.getString(c.getColumnIndex( DataBase.key_code ) ) );
-
-                allContacts.add( model);
-            }
-            while ( c.moveToNext() );
-
-        db.close();
-
-        return allContacts;
-    }
-
-    public ContactVO getContactById( int id ) {
-        ContactVO model = new ContactVO();
-
-        Cursor c = db.getContactById( id );
-        if ( c.moveToFirst() ) {
-            model.id =  ( c.getInt(c.getColumnIndex( DataBase.key_contact_id ) ) );
-            model.name = ( c.getString(c.getColumnIndex( DataBase.key_name ) ) );
-            model.country.id = ( c.getInt(c.getColumnIndex( DataBase.key_country_id ) ) );
-            model.email = ( c.getString(c.getColumnIndex( DataBase.key_email ) ) );
-            model.phone = ( c.getString(c.getColumnIndex( DataBase.key_phone ) ) );
-            model.gender = ( c.getString(c.getColumnIndex( DataBase.key_gender ) ) );
-
-            Cursor cr = db.getCountryById( model.country.id );
-            if ( cr.moveToFirst() ) {
-                model.country.code = cr.getString(cr.getColumnIndex(DataBase.key_code));
-                model.country.country_name = cr.getString(cr.getColumnIndex(DataBase.key_country));
-            }
-        }
-
-        db.close();
-
-        return model;
-    }
-
-    public  void deleteContact( int id )
+    public  void deleteSale( int id )
     {
-        db.deleteContact( id );
+        db.deleteSale( id );
+    }
+
+    public void addCleint(ClientVO vo) {
+        ContentValues values = new ContentValues();
+        values.put( DataBase.key_client_name, vo.name );
+        values.put( DataBase.key_address, vo.address);
+        values.put( DataBase.key_client_phone, vo.phone);
+        db.addClient( values );
+    }
+
+    public void addCustomer(CustomerVO vo) {
+        ContentValues values = new ContentValues();
+        values.put( DataBase.key_customer_name, vo.name );
+        values.put( DataBase.key_position, vo.position);
+        values.put( DataBase.key_customer_phone, vo.phone);
+        db.addCustomer( values );
+    }
+
+    public void addCar(CarVO vo) {
+        ContentValues values = new ContentValues();
+        values.put( DataBase.key_brand, vo.brand );
+        values.put( DataBase.key_model, vo.model );
+        values.put( DataBase.key_year, vo.year);
+        values.put( DataBase.key_color, vo.color);
+        values.put( DataBase.key_kilometers, vo.kilometers);
+        values.put( DataBase.key_price, vo.price);
+        db.addCar( values );
+    }
+
+    public void addSale(SaleVO vo) {
+        ContentValues values = new ContentValues();
+        values.put( DataBase.client_id, vo.client.id );
+        values.put( DataBase.customer_id, vo.customer.id );
+        values.put( DataBase.car_id, vo.car.id);
+        values.put( DataBase.key_saledate, vo.saledate.getTime());
+        db.addSale( values );
     }
 }

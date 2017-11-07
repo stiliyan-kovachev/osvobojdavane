@@ -13,27 +13,10 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <Button
-            android:id="@+id/add"
-            android:text="add"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            />
-            <Button
-            android:id="@+id/viewSales"
-            android:text="view sales"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            />
-
         <ListView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/contactList"/>
-
-
+            android:id="@+id/salesList"/>
 
     </LinearLayout>
 

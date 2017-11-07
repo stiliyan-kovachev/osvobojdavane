@@ -5,8 +5,8 @@ import android.util.Patterns;
 
 public class Validation {
 
-    public static boolean isValidEmail(CharSequence target) {
-        return !TextUtils.isEmpty( target ) && android.util.Patterns.EMAIL_ADDRESS.matcher( target ).matches();
+    public static boolean isValidAddress(CharSequence target) {
+        return !TextUtils.isEmpty( target );
     }
 
     public static boolean isValidPhone(CharSequence target) {

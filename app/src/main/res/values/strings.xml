@@ -4,7 +4,7 @@
     <string name="title_activity_view_contact">ViewContactActivity</string>
 
     <string name="name">name</string>
-    <string name="email">email</string>
+    <string name="address">address</string>
     <string name="country">country</string>
     <string name="code">code</string>
     <string name="phone">phone</string>
@@ -15,7 +15,6 @@
     <string name="confirm">confirm</string>
     <string name="areYouSure">Are you sure?</string>
     <string name="uRonAwayAddContact">You are on a way to save contact</string>
-
 
 
     <string-array name="countries">
@@ -45,5 +44,9 @@
         <item>Female</item>
     </string-array>
     <string name="title_activity_edit_contact">EditContactActivity</string>
+    <string name="title_activity_add_customer">AddCustomer</string>
+    <string name="title_activity_add_caractivity">AddCaractivity</string>
+    <string name="title_activity_add">AddActivity</string>
+    <string name="title_activity_view_sales">ViewSalesActivity</string>
 
 </resources>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/brand"
+        android:hint="brand"/>
+
+    <!--  <Spinner
+          android:id="@+id/spinCountry"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content">
+      </Spinner>-->
+
+    <!-- <LinearLayout
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content">
+
+         <Spinner
+             android:id="@+id/spinCode"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content">
+         </Spinner>-->
+
+    <EditText
+        android:id="@+id/model"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="model"/>
+    <!--</LinearLayout>-->
+
+    <EditText
+        android:id="@+id/year"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="year"/>
+
+    <EditText
+        android:id="@+id/color"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="color"/>
+
+    <EditText
+        android:id="@+id/kilometers"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="kilometers"/>
+
+    <EditText
+        android:id="@+id/price"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="price"/>
+
+    <!--    <Spinner
+            android:id="@+id/spinGender"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </Spinner>-->
+
+
+    <Button
+        android:id="@+id/confirm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:padding="20dp"
+        android:text="@string/confirm" />
+
+</LinearLayout>

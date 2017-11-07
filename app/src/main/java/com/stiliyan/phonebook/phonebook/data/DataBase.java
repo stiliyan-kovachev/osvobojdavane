@@ -9,20 +9,31 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DataBase extends SQLiteOpenHelper {
 
-    private static final String database_name = "phonebookDB";
-    private static final String contact_table_name = "phonebook";
-    private static final String country_table_name = "country";
+    private static final String database_name = "carsaleDB";
+    private static final String client_table_name = "client";
+    private static final String customer_table_name = "customer";
+    private static final String car_table_name = "car";
+    private static final String sale_table_name = "sale";
 
     private static final int table_version    = 1;
 
-    public  static  final String key_contact_id  = "contact_id";
-    public  static  final String key_name    = "name";
-    public  static  final String key_email   = "email";
-    public  static  final String key_country = "country";
-    public  static  final String key_country_id = "country_id";
-    public  static  final String key_code    = "code";
-    public  static  final String key_phone   = "phone";
-    public  static  final String key_gender  = "gender";
+    public  static  final String client_id = "contact_id";
+    public  static  final String key_client_name    = "cl_name";
+    public  static  final String key_customer_name    = "cs_name";
+    public  static  final String key_address = "address";
+    public  static  final String key_client_phone   = "cl_phone";
+    public  static  final String key_customer_phone   = "cs_phone";
+    public  static  final String customer_id = "customer_id";
+    public  static  final String key_position = "position";
+    public  static  final String car_id       = "car_id";
+    public  static  final String key_brand     = "brand";
+    public  static  final String key_model     = "model";
+    public  static  final String key_year     = "year";
+    public  static  final String key_color     = "color";
+    public  static  final String key_kilometers     = "kilometers";
+    public  static  final String key_price     = "price";
+    public  static  final String sale_id     = "sale_id";
+    public  static  final String key_saledate   = "saldate";
 
     private SQLiteDatabase db;
 
@@ -31,26 +42,43 @@ public class DataBase extends SQLiteOpenHelper {
         super( context, database_name, null, table_version );
     }
 
-    public void addContact( ContentValues contact ) {
-        open();
 
-        db.insert(contact_table_name, null, contact );
+    public void addClient(ContentValues client) {
+        open();
+        db.insert(client_table_name, null, client );
         close();
     }
 
-    public void updateContact( int id, ContentValues contact ) {
+    public void addCustomer(ContentValues client) {
+        open();
+        db.insert(customer_table_name, null, client );
+        close();
+    }
+    public void addCar(ContentValues client) {
+        open();
+        db.insert(car_table_name, null, client );
+        close();
+    }
+
+    public void addSale(ContentValues client) {
+        open();
+        db.insert(sale_table_name, null, client );
+        close();
+    }
+
+    public void updateSale(int id, ContentValues contact ) {
         open();
 
-        db.update( contact_table_name, contact, key_contact_id +  " = '" + id + "'", null );
+        db.update(sale_table_name, contact, sale_id +  " = '" + id + "'", null );
 
         close();
     }
 
-    public Cursor getAllContacts()
+    public Cursor getAllClients()
     {
         open();
 
-        Cursor cursor =  db.query( contact_table_name, new String[]{ key_contact_id, key_name, key_phone },null, null, null, null, null );
+        Cursor cursor =  db.query(client_table_name, new String[]{client_id, key_client_name},null, null, null, null, null );
 
 //        close();
 
@@ -58,11 +86,11 @@ public class DataBase extends SQLiteOpenHelper {
 
     }
 
-    public Cursor getAllCountries()
+    public Cursor getAllCustomers()
     {
         open();
 
-        Cursor cursor =  db.query(country_table_name, new String[]{ key_country_id, key_country, key_code },null, null, null, null, null );
+        Cursor cursor =  db.query(customer_table_name, new String[]{customer_id, key_customer_name},null, null, null, null, null );
 
 //        close();
 
@@ -70,31 +98,48 @@ public class DataBase extends SQLiteOpenHelper {
 
     }
 
-    public void deleteContact( int id )
+    public Cursor getAllCars()
     {
         open();
 
-//        db.rawQuery("delete from " + contact_table_name + " " + "where " + key_id + " = '" + id + "'", null );
-        db.delete( contact_table_name, key_contact_id + "=" + id, null );
-        close();
-    }
+        Cursor cursor =  db.query(car_table_name, new String[]{car_id, key_brand},null, null, null, null, null );
 
-    public Cursor getContactById( int id )
-    {
-        open();
-
-        Cursor cursor = db.rawQuery( "select " + "*" + " from " + contact_table_name + " " + "where " + key_contact_id + " = '" + id + "'", null );
+//        close();
 
         return  cursor;
 
     }
 
-    public Cursor getCountryById( int id )
+    public Cursor getAllSales()
     {
         open();
 
-        Cursor cursor = db.rawQuery( "select " + "*" + " from " + country_table_name + " " + "where " + key_country_id + " = '" + id + "'", null );
+        Cursor cursor = db.rawQuery( "select " + "*" + " from " +sale_table_name +
+                " inner join " +client_table_name +" on " + sale_table_name +"."  + client_id + " = "+client_table_name +"." + client_id +
+                " inner join " +customer_table_name +" on " + sale_table_name +"."  + customer_id + " = "+customer_table_name +"." + customer_id +
+                " inner join " +car_table_name +" on " + sale_table_name +"."  + car_id + " = "+car_table_name +"." + car_id +
+                ";", null );
 
+//        close();
+
+        return  cursor;
+
+    }
+
+    public void deleteSale( int id )
+    {
+        open();
+
+//        db.rawQuery("delete from " + client_table_name + " " + "where " + key_id + " = '" + id + "'", null );
+        db.delete(sale_table_name, sale_id + "=" + id, null );
+        close();
+    }
+
+    public Cursor getSaleById( int id )
+    {
+        open();
+
+        Cursor cursor = db.rawQuery( "select " + "*" + " from " +sale_table_name + " " + "inner join " +customer_table_name +" on " + sale_table_name +"."  + client_id + " = "+client_table_name +"." + client_id +";", null );
         return  cursor;
 
     }
@@ -104,7 +149,7 @@ public class DataBase extends SQLiteOpenHelper {
         open();
 
         int count = 0;
-        Cursor c = db.rawQuery( "select count(*) from " + country_table_name, null );
+        Cursor c = db.rawQuery( "select count(*) from " + customer_table_name, null );
         if( c.moveToFirst() ) {
             count = c.getInt( 0 );
         }
@@ -113,29 +158,40 @@ public class DataBase extends SQLiteOpenHelper {
         return count > 0;
     }
 
-    public void addCountry( ContentValues contact )
-    {
-        open();
-
-        db.insert( country_table_name, null, contact );
-        close();
-
-    }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table "+ contact_table_name + " (" +
-                key_contact_id + " integer primary key autoincrement," +
-                key_name + " text not null, " +
-                key_email + " text not null, " +
-                key_country_id + " integer, " +
-                key_phone + " text not null, " +
-                key_gender + " text not null " + ");");
+        db.execSQL("create table "+ client_table_name + " (" +
+                client_id + " integer primary key autoincrement," +
+                key_client_name + " text not null, " +
+                key_address + " text not null, " +
+                key_client_phone + " text not null " + ");");
 
-        db.execSQL("create table "+ country_table_name + " (" +
-                key_country_id + " integer primary key autoincrement," +
-                key_country + " text not null, " +
-                key_code + " text not null " + ");");
+        db.execSQL("create table "+ customer_table_name + " (" +
+                customer_id + " integer primary key autoincrement," +
+                key_customer_name + " text not null, " +
+                key_position + " text not null, " +
+                key_customer_phone + " text not null " + ");");
+
+        db.execSQL("create table "+ car_table_name + " (" +
+                car_id + " integer primary key autoincrement," +
+                key_brand + " text not null, " +
+                key_model + " text not null, " +
+                key_year + " integer, " +
+                key_kilometers + " integer, " +
+                key_price + " integer, " +
+                key_color + " text not null " + ");");
+
+        db.execSQL("create table "+ sale_table_name + " (" +
+                sale_id + " integer primary key autoincrement," +
+                client_id + " integer, " +
+                customer_id + " integer, " +
+                key_saledate + " integer, " +
+                car_id + " integer, " +
+                "FOREIGN KEY("+client_id+") REFERENCES "+client_table_name+"("+client_id+")" +
+                "FOREIGN KEY("+customer_id+") REFERENCES "+customer_table_name+"("+customer_id+")" +
+                "FOREIGN KEY("+car_id+") REFERENCES "+car_table_name+"("+car_id+")" +
+                ");");
     }
 
     @Override
@@ -151,4 +207,6 @@ public class DataBase extends SQLiteOpenHelper {
     {
         db.close();
     }
+
+
 }
