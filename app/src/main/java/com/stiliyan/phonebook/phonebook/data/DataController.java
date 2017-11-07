@@ -295,7 +295,7 @@ public class DataController {
         return models;
     }
 
-    public List<SaleVO> salesForPeriod( int from, int to ){
+    public List<SaleVO> salesForPeriod( long from, long to ){
         List<SaleVO> models = new ArrayList<>();
         Cursor c = db.salesForPeriod( from, to );
 

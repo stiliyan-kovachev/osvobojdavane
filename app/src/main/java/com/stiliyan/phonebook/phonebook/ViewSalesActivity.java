@@ -29,7 +29,6 @@ public class ViewSalesActivity extends AppCompatActivity {
 
         salesList = (ListView) findViewById( R.id.salesList );
 
-        DataController.getInstance().setContext( this );
         salesData = DataController.getInstance().getAllSales();
 
         contactListAdapter = new ContactListAdapter( this, R.layout.contact_list_item_renderer, salesData );

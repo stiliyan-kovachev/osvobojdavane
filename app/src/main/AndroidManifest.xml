@@ -44,6 +44,14 @@
         <activity
             android:name=".InquiriesActivity"
             android:label="@string/title_activity_inquiries"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".LastFiveActivity"
+            android:label="@string/title_activity_last_five"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".SalesForPeriodActivity"
+            android:label="@string/title_activity_sales_for_period"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

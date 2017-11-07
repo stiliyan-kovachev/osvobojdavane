@@ -175,7 +175,7 @@ public class DataBase extends SQLiteOpenHelper {
         return  cursor;
     }
 
-    public  Cursor salesForPeriod( int from, int to ){
+    public  Cursor salesForPeriod( long from, long to ){
         open();
         Cursor cursor = db.rawQuery( "select " + "*" + " from " +sale_table_name +
                 " inner join " +client_table_name +" on " + sale_table_name +"."  + client_id + " = "+client_table_name +"." + client_id +
@@ -237,7 +237,7 @@ public class DataBase extends SQLiteOpenHelper {
                 sale_id + " integer primary key autoincrement," +
                 client_id + " integer, " +
                 customer_id + " integer, " +
-                key_saledate + " integer, " +
+                key_saledate + " long, " +
                 car_id + " integer, " +
                 "FOREIGN KEY("+client_id+") REFERENCES "+client_table_name+"("+client_id+")" +
                 "FOREIGN KEY("+customer_id+") REFERENCES "+customer_table_name+"("+customer_id+")" +

@@ -22,17 +22,18 @@ public class MainActivity extends AppCompatActivity {
 
     private Button addBtn;
     private Button viewSalesBtn;
-
-
-    private List<SaleVO> contactData;
+    private Button inquiriesBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        DataController.getInstance().setContext( this );
+
         addBtn = (Button) findViewById(R.id.add);
         viewSalesBtn = (Button) findViewById(R.id.viewSales);
+        inquiriesBtn = (Button) findViewById(R.id.inquiries);
 
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,6 +47,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this,ViewSalesActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        inquiriesBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this,InquiriesActivity.class);
                 startActivity(intent);
             }
         });
