@@ -98,7 +98,7 @@ public class DataController {
         if ( c.moveToFirst() )
             do {
                 InsuranceVO client = new InsuranceVO();
-                client.id = c.getInt(c.getColumnIndex(DataBase.credit_card_id));
+                client.id = c.getInt(c.getColumnIndex(DataBase.insurance_id));
                 client.insurer = c.getString(c.getColumnIndex(DataBase.key_insurer_name));
                 clients.add(client);
             }
