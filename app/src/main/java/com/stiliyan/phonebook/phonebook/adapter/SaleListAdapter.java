@@ -12,13 +12,13 @@ import com.stiliyan.phonebook.phonebook.data.SaleVO;
 
 import java.util.List;
 
-public class ContactListAdapter extends ArrayAdapter<SaleVO> {
+public class SaleListAdapter extends ArrayAdapter<SaleVO> {
 
-    public ContactListAdapter( Context context, int textViewResourceId ) {
+    public SaleListAdapter(Context context, int textViewResourceId ) {
         super( context, textViewResourceId );
     }
 
-    public ContactListAdapter( Context context, int resource, List<SaleVO> items ) {
+    public SaleListAdapter(Context context, int resource, List<SaleVO> items ) {
         super( context, resource, items );
     }
 
@@ -30,7 +30,7 @@ public class ContactListAdapter extends ArrayAdapter<SaleVO> {
         if ( v == null ) {
             LayoutInflater vi;
             vi = LayoutInflater.from( getContext() );
-            v = vi.inflate( R.layout.contact_list_item_renderer, null );
+            v = vi.inflate( R.layout.sale_list_item_renderer, null );
         }
 
         SaleVO p = getItem( position );

@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.stiliyan.phonebook.phonebook.adapter.ContactListAdapter;
+import com.stiliyan.phonebook.phonebook.adapter.SaleListAdapter;
 import com.stiliyan.phonebook.phonebook.data.DataController;
 import com.stiliyan.phonebook.phonebook.data.SaleVO;
 import com.stiliyan.phonebook.phonebook.utils.Consts;
@@ -19,7 +19,7 @@ import java.util.List;
 
 public class ViewSalesActivity extends AppCompatActivity {
 
-    private ContactListAdapter contactListAdapter;
+    private SaleListAdapter contactListAdapter;
     private ListView salesList;
     private List<SaleVO> salesData;
     @Override
@@ -31,7 +31,7 @@ public class ViewSalesActivity extends AppCompatActivity {
 
         salesData = DataController.getInstance().getAllSales();
 
-        contactListAdapter = new ContactListAdapter( this, R.layout.contact_list_item_renderer, salesData );
+        contactListAdapter = new SaleListAdapter( this, R.layout.sale_list_item_renderer, salesData );
         salesList.setAdapter( contactListAdapter );
 
         salesList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {

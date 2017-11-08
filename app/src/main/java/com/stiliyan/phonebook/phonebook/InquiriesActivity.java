@@ -41,6 +41,14 @@ public class InquiriesActivity extends AppCompatActivity {
                 startActivity( intent );
             }
         });
+
+        salesFromCustomerBtrn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent( InquiriesActivity.this, SaledCarsFromCustomerActivity.class );
+                startActivity( intent );
+            }
+        });
     }
 
 }

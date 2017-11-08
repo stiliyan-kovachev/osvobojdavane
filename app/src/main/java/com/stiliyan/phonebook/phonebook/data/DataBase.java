@@ -145,10 +145,10 @@ public class DataBase extends SQLiteOpenHelper {
     public  Cursor saledCarsFromCustomerOrdered( int customerId ){
         open();
         Cursor cursor = db.rawQuery( "select " + car_id +"," + key_brand +"," + key_model + "," + key_year + "," + key_color + "," + key_kilometers + "," +key_price +
-                " from " +sale_table_name +
+                " from (select * from " +sale_table_name +
                 " inner join " +customer_table_name +" on " + sale_table_name +"."  + customer_id + " = "+customer_table_name +"." + customer_id +
                 " inner join " +car_table_name +" on " + sale_table_name +"."  + car_id + " = "+car_table_name +"." + car_id +
-                ";" + " where " + customer_id + " = " + customerId + ";" + " order by " + key_saledate + " asc;", null );
+                ")" + " where " + customer_id + " = " + customerId + ";" + " order by " + key_saledate + " asc;", null );
 
         return  cursor;
     }

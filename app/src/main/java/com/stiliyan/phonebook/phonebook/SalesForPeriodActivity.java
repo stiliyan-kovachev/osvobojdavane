@@ -1,27 +1,17 @@
 package com.stiliyan.phonebook.phonebook;
 
-import android.app.DatePickerDialog;
-import android.app.Dialog;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.stiliyan.phonebook.phonebook.adapter.ContactListAdapter;
+import com.stiliyan.phonebook.phonebook.adapter.SaleListAdapter;
 import com.stiliyan.phonebook.phonebook.data.DataController;
 import com.stiliyan.phonebook.phonebook.data.SaleVO;
 import com.stiliyan.phonebook.phonebook.utils.DatePickerFragment;
 
-import org.w3c.dom.Text;
-
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -33,7 +23,7 @@ public class SalesForPeriodActivity extends AppCompatActivity {
     private TextView toTW;
     private Button sortBtn;
 
-    private ContactListAdapter contactListAdapter;
+    private SaleListAdapter contactListAdapter;
     private ListView salesList;
 
     private Date from;
@@ -100,7 +90,7 @@ public class SalesForPeriodActivity extends AppCompatActivity {
                   toTW.setError(null);
 
                 List<SaleVO> sales = DataController.getInstance().salesForPeriod(from.getTime(), to.getTime() );
-                contactListAdapter = new ContactListAdapter( SalesForPeriodActivity.this, R.layout.contact_list_item_renderer, sales );
+                contactListAdapter = new SaleListAdapter( SalesForPeriodActivity.this, R.layout.sale_list_item_renderer, sales );
                 salesList.setAdapter( contactListAdapter );
             }
         });

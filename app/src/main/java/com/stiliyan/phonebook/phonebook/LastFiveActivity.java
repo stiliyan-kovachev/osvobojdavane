@@ -1,14 +1,10 @@
 package com.stiliyan.phonebook.phonebook;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.widget.ListView;
 
-import com.stiliyan.phonebook.phonebook.adapter.ContactListAdapter;
+import com.stiliyan.phonebook.phonebook.adapter.SaleListAdapter;
 import com.stiliyan.phonebook.phonebook.data.DataController;
 import com.stiliyan.phonebook.phonebook.data.SaleVO;
 
@@ -16,7 +12,7 @@ import java.util.List;
 
 public class LastFiveActivity extends AppCompatActivity {
 
-    private ContactListAdapter contactListAdapter;
+    private SaleListAdapter contactListAdapter;
     private ListView salesList;
     private List<SaleVO> salesData;
 
@@ -29,7 +25,7 @@ public class LastFiveActivity extends AppCompatActivity {
 
         salesData = DataController.getInstance().lastFiveSalesOrderedByPrice();
 
-        contactListAdapter = new ContactListAdapter( this, R.layout.contact_list_item_renderer, salesData );
+        contactListAdapter = new SaleListAdapter( this, R.layout.sale_list_item_renderer, salesData );
         salesList.setAdapter( contactListAdapter );
     }
 
