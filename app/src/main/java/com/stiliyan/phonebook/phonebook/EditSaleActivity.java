@@ -210,6 +210,8 @@ public class EditSaleActivity extends AppCompatActivity {
         sale.client = clientsList.get(clients.getSelectedItemPosition());
         sale.customer = customersList.get(customers.getSelectedItemPosition());
         sale.car = carsList.get(cars.getSelectedItemPosition());
+        sale.creditCard = creditcardsList.get( creditCards.getSelectedItemPosition() );
+        sale.insuranceType = insurancesList.get( insurances.getSelectedItemPosition() );
 
         sale.saledate = saleDate;
 
