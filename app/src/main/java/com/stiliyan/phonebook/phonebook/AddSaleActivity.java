@@ -103,7 +103,7 @@ public class AddSaleActivity extends AppCompatActivity {
         sale.customer = customersList.get(customers.getSelectedItemPosition());
         sale.car = carsList.get(cars.getSelectedItemPosition());
 
-        sale.saledate = new Date();
+        sale.saledate = new Date(System.currentTimeMillis());
 
         DataController.getInstance().addSale(sale);
         finish();

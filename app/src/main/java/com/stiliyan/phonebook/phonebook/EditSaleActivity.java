@@ -133,6 +133,7 @@ public class EditSaleActivity extends AppCompatActivity {
 
         SaleVO sale = new SaleVO();
         sale.id = saleID;
+        sale.saledate = new Date(System.currentTimeMillis());
         sale.client = clientsList.get(clients.getSelectedItemPosition());
         sale.customer = customersList.get(customers.getSelectedItemPosition());
         sale.car = carsList.get(cars.getSelectedItemPosition());

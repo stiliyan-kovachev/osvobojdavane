@@ -80,10 +80,10 @@ public class DataController {
 
         ContentValues values = new ContentValues();
 //        values.put( DataBase.sale_id, sale.id );
+        values.put ( DataBase.key_saledate, sale.saledate.getTime() );
         values.put( DataBase.client_id, sale.client.id );
         values.put( DataBase.customer_id, sale.customer.id );
         values.put( DataBase.car_id, sale.car.id );
-        values.put( DataBase.key_saledate, sale.saledate.getTime() );
 
         db.updateSale( sale.id, values );
     }
@@ -96,8 +96,8 @@ public class DataController {
             do {
 
                 SaleVO model = new SaleVO();
-                model.id =  ( c.getInt(c.getColumnIndex( DataBase.client_id) ) );
-                model.saledate = new Date( ( c.getInt(c.getColumnIndex( DataBase.key_saledate) ) ) );
+                model.id =  ( c.getInt(c.getColumnIndex( DataBase.sale_id) ) );
+                model.saledate = new Date( ( c.getLong(c.getColumnIndex( DataBase.key_saledate) ) ) );
 
                 model.client = new ClientVO();
                 model.client.id = ( c.getInt(c.getColumnIndex( DataBase.client_id ) ) );
@@ -177,8 +177,8 @@ public class DataController {
         Cursor c = db.getSaleById( saleID );
         if ( c.moveToFirst() )
             do {
-                sale.id =  ( c.getInt(c.getColumnIndex( DataBase.client_id) ) );
-                sale.saledate = new Date( ( c.getInt(c.getColumnIndex( DataBase.key_saledate) ) ) );
+                sale.id =  ( c.getInt(c.getColumnIndex( DataBase.sale_id) ) );
+                sale.saledate = new Date( ( c.getLong(c.getColumnIndex( DataBase.key_saledate) ) ) );
 
                 sale.client = new ClientVO();
                 sale.client.id = ( c.getInt(c.getColumnIndex( DataBase.client_id ) ) );
@@ -262,8 +262,8 @@ public class DataController {
             do {
 
                 SaleVO model = new SaleVO();
-                model.id =  ( c.getInt(c.getColumnIndex( DataBase.client_id) ) );
-                model.saledate = new Date( ( c.getInt(c.getColumnIndex( DataBase.key_saledate) ) ) );
+                model.id =  ( c.getInt(c.getColumnIndex( DataBase.sale_id) ) );
+                model.saledate = new Date( ( c.getLong(c.getColumnIndex( DataBase.key_saledate) ) ) );
 
                 model.client = new ClientVO();
                 model.client.id = ( c.getInt(c.getColumnIndex( DataBase.client_id ) ) );
@@ -303,8 +303,8 @@ public class DataController {
             do {
 
                 SaleVO model = new SaleVO();
-                model.id =  ( c.getInt(c.getColumnIndex( DataBase.client_id) ) );
-                model.saledate = new Date( ( c.getInt(c.getColumnIndex( DataBase.key_saledate) ) ) );
+                model.id =  ( c.getInt(c.getColumnIndex( DataBase.sale_id) ) );
+                model.saledate = new Date( ( c.getLong(c.getColumnIndex( DataBase.key_saledate) ) ) );
 
                 model.client = new ClientVO();
                 model.client.id = ( c.getInt(c.getColumnIndex( DataBase.client_id ) ) );

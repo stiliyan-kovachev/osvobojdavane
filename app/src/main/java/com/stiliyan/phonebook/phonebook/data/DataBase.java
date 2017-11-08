@@ -148,18 +148,18 @@ public class DataBase extends SQLiteOpenHelper {
                 " from " +sale_table_name +
                 " inner join " +customer_table_name +" on " + sale_table_name +"."  + customer_id + " = "+customer_table_name +"." + customer_id +
                 " inner join " +car_table_name +" on " + sale_table_name +"."  + car_id + " = "+car_table_name +"." + car_id +
-                ";" + " where " + customer_id + " = " + customerId + ";" + " order by " + key_saledate + "ask;", null );
+                ";" + " where " + customer_id + " = " + customerId + ";" + " order by " + key_saledate + " asc;", null );
 
         return  cursor;
     }
 
     public  Cursor lastFiveSalesOrderedByPrice(){
         open();
-        Cursor cursor = db.rawQuery( "select " + "*" + " from " +sale_table_name +
+        Cursor cursor = db.rawQuery( "select * from (select " + "*" + " from " +sale_table_name +
                 " inner join " +client_table_name +" on " + sale_table_name +"."  + client_id + " = "+client_table_name +"." + client_id +
                 " inner join " +customer_table_name +" on " + sale_table_name +"."  + customer_id + " = "+customer_table_name +"." + customer_id +
                 " inner join " +car_table_name +" on " + sale_table_name +"."  + car_id + " = "+car_table_name +"." + car_id +
-                ";" + " order by " + key_price + "ask;" + " limit 10;", null );
+               " order by " + key_price + " asc)" + " limit 5;", null );
 
         return  cursor;
     }
@@ -181,7 +181,7 @@ public class DataBase extends SQLiteOpenHelper {
                 " inner join " +client_table_name +" on " + sale_table_name +"."  + client_id + " = "+client_table_name +"." + client_id +
                 " inner join " +customer_table_name +" on " + sale_table_name +"."  + customer_id + " = "+customer_table_name +"." + customer_id +
                 " inner join " +car_table_name +" on " + sale_table_name +"."  + car_id + " = "+car_table_name +"." + car_id +
-                ";" + " order by " + key_saledate + " between " + from + " and " + to + ";", null );
+                " order by " + key_saledate + " between " + from + " and " + to + ";", null );
 
         return  cursor;
     }
@@ -194,21 +194,6 @@ public class DataBase extends SQLiteOpenHelper {
         db.delete(sale_table_name, sale_id + "=" + id, null );
         close();
     }
-
-    public boolean hasoCountries()
-    {
-        open();
-
-        int count = 0;
-        Cursor c = db.rawQuery( "select count(*) from " + customer_table_name, null );
-        if( c.moveToFirst() ) {
-            count = c.getInt( 0 );
-        }
-        close();
-
-        return count > 0;
-    }
-
 
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -238,7 +223,6 @@ public class DataBase extends SQLiteOpenHelper {
                 client_id + " integer, " +
                 customer_id + " integer, " +
                 key_saledate + " long, " +
-                car_id + " integer, " +
                 "FOREIGN KEY("+client_id+") REFERENCES "+client_table_name+"("+client_id+")" +
                 "FOREIGN KEY("+customer_id+") REFERENCES "+customer_table_name+"("+customer_id+")" +
                 "FOREIGN KEY("+car_id+") REFERENCES "+car_table_name+"("+car_id+")" +
