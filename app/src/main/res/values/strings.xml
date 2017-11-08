@@ -56,5 +56,6 @@
     <string name="title_activity_boght_cars_by_client">BoghtCarsByClientActivity</string>
     <string name="title_activity_add_creditcard">AddCreditcardActivity</string>
     <string name="title_activity_add_insurance">AddInsuranceActivity</string>
+    <string name="title_activity_cars_insurated">CarsInsuratedActivity</string>
 
 </resources>

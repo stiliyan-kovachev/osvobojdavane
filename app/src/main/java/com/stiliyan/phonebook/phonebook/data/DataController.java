@@ -328,6 +328,29 @@ public class DataController {
         return models;
     }
 
+    public List<CarVO> carsInsuratedWithType( int insuranceId ){
+        List<CarVO> models = new ArrayList<>();
+
+        Cursor c = db.carsInsuratedWithType( insuranceId );
+        if ( c.moveToFirst() )
+            do {
+                CarVO model = new CarVO();
+                model.id = c.getInt(c.getColumnIndex(DataBase.car_id));
+                model.brand = c.getString(c.getColumnIndex(DataBase.key_brand));
+                model.model = c.getString(c.getColumnIndex(DataBase.key_model));
+                model.year = c.getInt(c.getColumnIndex(DataBase.key_year));
+                model.color = c.getString(c.getColumnIndex(DataBase.key_color));
+                model.kilometers = c.getInt(c.getColumnIndex(DataBase.key_kilometers));
+                model.price = c.getInt(c.getColumnIndex(DataBase.key_price));
+
+                models.add(model);
+            }
+            while (c.moveToNext() );
+        db.close();
+
+        return models;
+    }
+
     public List<SaleVO> lastFiveSalesOrderedByPrice(){
         List<SaleVO> models = new ArrayList<>();
         Cursor c = db.lastFiveSalesOrderedByPrice();

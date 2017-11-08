@@ -67,6 +67,20 @@
             android:layout_margin="5dp"
             />
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="cars insurated with insurance type"
+            android:textSize="23dp"/>
+
+        <Button
+            android:id="@+id/insuratedCars"
+            android:text="click"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            />
+
 
     </LinearLayout>
 

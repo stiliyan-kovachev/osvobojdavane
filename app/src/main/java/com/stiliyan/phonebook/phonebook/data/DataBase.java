@@ -239,6 +239,17 @@ public class DataBase extends SQLiteOpenHelper {
         return  cursor;
     }
 
+    public  Cursor carsInsuratedWithType( int insuranceId ){
+        open();
+        Cursor cursor = db.rawQuery( "select " + car_id +"," + key_brand +"," + key_model + "," + key_year + "," + key_color + "," + key_kilometers + "," +key_price +
+                " from (select * from " + sale_table_name +
+                " inner join " +client_table_name +" on " + sale_table_name +"."  + client_id + " = "+client_table_name +"." + client_id +
+                " inner join " +car_table_name +" on " + sale_table_name +"."  + car_id + " = "+car_table_name +"." + car_id +
+                ")" + " where " + insurance_id + " = " + insuranceId + ";" , null );
+
+        return  cursor;
+    }
+
     public void deleteSale( int id )
     {
         open();

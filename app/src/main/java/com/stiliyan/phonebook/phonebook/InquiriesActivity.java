@@ -15,6 +15,7 @@ public class InquiriesActivity extends AppCompatActivity {
     private Button lastFiveSalesBtrn;
     private Button boughtFromClientBtn;
     private Button salesForPeriodBtn;
+    private Button carsInsuratedBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +26,7 @@ public class InquiriesActivity extends AppCompatActivity {
         lastFiveSalesBtrn = (Button) findViewById(R.id.lastFiveSales);
         boughtFromClientBtn = (Button) findViewById(R.id.boughtFromClient);
         salesForPeriodBtn = (Button) findViewById(R.id.salesForPeriod);
+        carsInsuratedBtn = (Button) findViewById(R.id.insuratedCars);
 
         lastFiveSalesBtrn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,6 +56,14 @@ public class InquiriesActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent( InquiriesActivity.this, BoghtCarsByClientActivity.class );
+                startActivity( intent );
+            }
+        });
+
+        carsInsuratedBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent( InquiriesActivity.this, CarsInsuratedActivity.class );
                 startActivity( intent );
             }
         });
