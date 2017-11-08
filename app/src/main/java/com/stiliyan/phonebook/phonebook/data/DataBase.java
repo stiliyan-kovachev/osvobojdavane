@@ -177,11 +177,11 @@ public class DataBase extends SQLiteOpenHelper {
 
     public  Cursor salesForPeriod( long from, long to ){
         open();
-        Cursor cursor = db.rawQuery( "select " + "*" + " from " +sale_table_name +
+        Cursor cursor = db.rawQuery( "select * from (select " + "*" + " from " +sale_table_name +
                 " inner join " +client_table_name +" on " + sale_table_name +"."  + client_id + " = "+client_table_name +"." + client_id +
                 " inner join " +customer_table_name +" on " + sale_table_name +"."  + customer_id + " = "+customer_table_name +"." + customer_id +
                 " inner join " +car_table_name +" on " + sale_table_name +"."  + car_id + " = "+car_table_name +"." + car_id +
-                " order by " + key_saledate + " between " + from + " and " + to + ";", null );
+                ") where " + key_saledate +" between " + from + " and " + to + ";", null );
 
         return  cursor;
     }

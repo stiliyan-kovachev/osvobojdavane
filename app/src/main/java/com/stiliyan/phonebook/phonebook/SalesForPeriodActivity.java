@@ -84,6 +84,20 @@ public class SalesForPeriodActivity extends AppCompatActivity {
         sortBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if ( from == null ){
+                    fromTW.setError( "please set from time" );
+                    return;
+                }
+                else
+                    fromTW.setError(null);
+
+                if ( to == null ){
+                    toTW.setError( "please set to time" );
+                    return;
+                }
+                else
+                  toTW.setError(null);
+
                 List<SaleVO> sales = DataController.getInstance().salesForPeriod(from.getTime(), to.getTime() );
                 contactListAdapter = new ContactListAdapter( SalesForPeriodActivity.this, R.layout.contact_list_item_renderer, sales );
                 salesList.setAdapter( contactListAdapter );
