@@ -163,6 +163,8 @@ public class DataBase extends SQLiteOpenHelper {
                 " inner join " +client_table_name +" on " + sale_table_name +"."  + client_id + " = "+client_table_name +"." + client_id +
                 " inner join " +customer_table_name +" on " + sale_table_name +"."  + customer_id + " = "+customer_table_name +"." + customer_id +
                 " inner join " +car_table_name +" on " + sale_table_name +"."  + car_id + " = "+car_table_name +"." + car_id +
+                " inner join " +credit_card_name +" on " + sale_table_name +"."  + credit_card_id + " = "+credit_card_name +"." + credit_card_id +
+                " inner join " +insurance_name +" on " + sale_table_name +"."  + insurance_id + " = "+insurance_name +"." + insurance_id +
                 ";", null );
 
 //        close();
@@ -179,6 +181,8 @@ public class DataBase extends SQLiteOpenHelper {
                 " inner join " +client_table_name +" on " + sale_table_name +"."  + client_id + " = "+client_table_name +"." + client_id +
                 " inner join " +customer_table_name +" on " + sale_table_name +"."  + customer_id + " = "+customer_table_name +"." + customer_id +
                 " inner join " +car_table_name +" on " + sale_table_name +"."  + car_id + " = "+car_table_name +"." + car_id +
+                " inner join " +credit_card_name +" on " + sale_table_name +"."  + credit_card_id + " = "+credit_card_name +"." + credit_card_id +
+                " inner join " +insurance_name +" on " + sale_table_name +"."  + insurance_id + " = "+insurance_name +"." + insurance_id +
                 ") where " + sale_id + " = " + id + ";", null );
 
 //        close();
@@ -204,6 +208,8 @@ public class DataBase extends SQLiteOpenHelper {
                 " inner join " +client_table_name +" on " + sale_table_name +"."  + client_id + " = "+client_table_name +"." + client_id +
                 " inner join " +customer_table_name +" on " + sale_table_name +"."  + customer_id + " = "+customer_table_name +"." + customer_id +
                 " inner join " +car_table_name +" on " + sale_table_name +"."  + car_id + " = "+car_table_name +"." + car_id +
+                " inner join " +credit_card_name +" on " + sale_table_name +"."  + credit_card_id + " = "+credit_card_name +"." + credit_card_id +
+                " inner join " +insurance_name +" on " + sale_table_name +"."  + insurance_id + " = "+insurance_name +"." + insurance_id +
                " order by " + key_price + " asc)" + " limit 5;", null );
 
         return  cursor;
@@ -226,6 +232,8 @@ public class DataBase extends SQLiteOpenHelper {
                 " inner join " +client_table_name +" on " + sale_table_name +"."  + client_id + " = "+client_table_name +"." + client_id +
                 " inner join " +customer_table_name +" on " + sale_table_name +"."  + customer_id + " = "+customer_table_name +"." + customer_id +
                 " inner join " +car_table_name +" on " + sale_table_name +"."  + car_id + " = "+car_table_name +"." + car_id +
+                " inner join " +credit_card_name +" on " + sale_table_name +"."  + credit_card_id + " = "+credit_card_name +"." + credit_card_id +
+                " inner join " +insurance_name +" on " + sale_table_name +"."  + insurance_id + " = "+insurance_name +"." + insurance_id +
                 ") where " + key_saledate +" between " + from + " and " + to + ";", null );
 
         return  cursor;
