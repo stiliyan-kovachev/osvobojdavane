@@ -167,10 +167,10 @@ public class DataBase extends SQLiteOpenHelper {
     public  Cursor boughtCarsByClient( int clientId ){
         open();
         Cursor cursor = db.rawQuery( "select " + car_id +"," + key_brand +"," + key_model + "," + key_year + "," + key_color + "," + key_kilometers + "," +key_price +
-                " from " +sale_table_name +
+                " from (select * from " + sale_table_name +
                 " inner join " +client_table_name +" on " + sale_table_name +"."  + client_id + " = "+client_table_name +"." + client_id +
                 " inner join " +car_table_name +" on " + sale_table_name +"."  + car_id + " = "+car_table_name +"." + car_id +
-                ";" + " where " + client_id + " = " + clientId + ";" , null );
+                ")" + " where " + client_id + " = " + clientId + ";" , null );
 
         return  cursor;
     }

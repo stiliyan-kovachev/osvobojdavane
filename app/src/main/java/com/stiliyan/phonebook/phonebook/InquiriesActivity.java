@@ -49,6 +49,14 @@ public class InquiriesActivity extends AppCompatActivity {
                 startActivity( intent );
             }
         });
+
+        boughtFromClientBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent( InquiriesActivity.this, BoghtCarsByClientActivity.class );
+                startActivity( intent );
+            }
+        });
     }
 
 }
