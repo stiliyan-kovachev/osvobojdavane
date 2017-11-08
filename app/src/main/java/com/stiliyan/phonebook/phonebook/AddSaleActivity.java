@@ -12,8 +12,10 @@ import android.widget.Toast;
 
 import com.stiliyan.phonebook.phonebook.data.CarVO;
 import com.stiliyan.phonebook.phonebook.data.ClientVO;
+import com.stiliyan.phonebook.phonebook.data.CreditCardVO;
 import com.stiliyan.phonebook.phonebook.data.CustomerVO;
 import com.stiliyan.phonebook.phonebook.data.DataController;
+import com.stiliyan.phonebook.phonebook.data.InsuranceVO;
 import com.stiliyan.phonebook.phonebook.data.SaleVO;
 import com.stiliyan.phonebook.phonebook.utils.DatePickerFragment;
 
@@ -26,6 +28,8 @@ public class AddSaleActivity extends AppCompatActivity {
     private Spinner clients;
     private Spinner customers;
     private Spinner cars;
+    private Spinner creditCards;
+    private Spinner insurances;
     private Button confirm;
     private Button saleDateBtn;
     private TextView saleTW;
@@ -35,6 +39,8 @@ public class AddSaleActivity extends AppCompatActivity {
     private List<ClientVO> clientsList;
     private List<CustomerVO> customersList;
     private List<CarVO> carsList;
+    private List<CreditCardVO> creditcardsList;
+    private List<InsuranceVO> insurancesList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +50,8 @@ public class AddSaleActivity extends AppCompatActivity {
         clients = (Spinner) findViewById(R.id.clients);
         customers = (Spinner) findViewById(R.id.customers);
         cars = (Spinner) findViewById(R.id.cars);
+        creditCards = (Spinner) findViewById(R.id.creditCard);
+        insurances = (Spinner) findViewById(R.id.insurance);
         confirm = (Button) findViewById(R.id.confirm);
         saleDateBtn = (Button) findViewById(R.id.sale_date_calendar);
         saleTW = (TextView) findViewById(R.id.sale_date_tw);
@@ -51,10 +59,14 @@ public class AddSaleActivity extends AppCompatActivity {
         clientsList = DataController.getInstance().getClients();
         customersList = DataController.getInstance().getCustomers();
         carsList = DataController.getInstance().getCars();
+        creditcardsList = DataController.getInstance().getCreditCards();
+        insurancesList = DataController.getInstance().getInsurances();
 
         List<String> clientNames = new ArrayList<>();
         List<String> customerNames = new ArrayList<>();
         List<String>carNames = new ArrayList<>();
+        List<String>creditcardNames = new ArrayList<>();
+        List<String>insuranceNames = new ArrayList<>();
 
         for ( int i = 0; i<clientsList.size();i++)
         {
@@ -68,6 +80,14 @@ public class AddSaleActivity extends AppCompatActivity {
         {
             carNames.add(carsList.get(i).brand);
         }
+        for ( int i = 0; i<creditcardsList.size();i++)
+        {
+            creditcardNames.add(String.valueOf( creditcardsList.get(i).number ));
+        }
+        for ( int i = 0; i<insurancesList.size();i++)
+        {
+            insuranceNames.add( insurancesList.get(i).insurer );
+        }
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>( this,android.R.layout.simple_spinner_item, clientNames );
         adapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item );
@@ -80,6 +100,14 @@ public class AddSaleActivity extends AppCompatActivity {
         adapter = new ArrayAdapter<String>( this,android.R.layout.simple_spinner_item, carNames );
         adapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item );
         cars.setAdapter( adapter );
+
+        adapter = new ArrayAdapter<String>( this,android.R.layout.simple_spinner_item, creditcardNames );
+        adapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item );
+        creditCards.setAdapter( adapter );
+
+        adapter = new ArrayAdapter<String>( this,android.R.layout.simple_spinner_item, insuranceNames );
+        adapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item );
+        insurances.setAdapter( adapter );
 
         confirm.setOnClickListener( new View.OnClickListener() {
             @Override
@@ -118,6 +146,16 @@ public class AddSaleActivity extends AppCompatActivity {
         if ( cars.getSelectedItemPosition() < 0 )
         {
             Toast.makeText(this,"invalid car", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if ( creditCards.getSelectedItemPosition() < 0 )
+        {
+            Toast.makeText(this,"invalid credit card", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if ( insurances.getSelectedItemPosition() < 0 )
+        {
+            Toast.makeText(this,"invalid insurance type", Toast.LENGTH_SHORT).show();
             return;
         }
         if ( saleDate == null )

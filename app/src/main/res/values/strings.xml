@@ -54,5 +54,7 @@
     <string name="title_activity_sales_for_period">SalesForPeriodActivity</string>
     <string name="title_activity_saled_cars_from_customer">SaledCarsFromCustomerActivity</string>
     <string name="title_activity_boght_cars_by_client">BoghtCarsByClientActivity</string>
+    <string name="title_activity_add_creditcard">AddCreditcardActivity</string>
+    <string name="title_activity_add_insurance">AddInsuranceActivity</string>
 
 </resources>

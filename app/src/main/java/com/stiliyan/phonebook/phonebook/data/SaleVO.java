@@ -7,5 +7,7 @@ public class SaleVO {
     public ClientVO client;
     public CarVO car;
     public CustomerVO customer;
+    public CreditCardVO creditCard;
+    public InsuranceVO insuranceType;
     public Date saledate;
 }

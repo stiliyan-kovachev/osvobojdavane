@@ -76,6 +76,38 @@ public class DataController {
         return clients;
     }
 
+    public List<CreditCardVO> getCreditCards() {
+        Cursor c = db.getAllCrediCards();
+        List<CreditCardVO> clients = new ArrayList<CreditCardVO>();
+        if ( c.moveToFirst() )
+            do {
+                CreditCardVO client = new CreditCardVO();
+                client.id = c.getInt(c.getColumnIndex(DataBase.credit_card_id));
+                client.number = c.getInt(c.getColumnIndex(DataBase.key_number));
+                clients.add(client);
+            }
+            while (c.moveToNext() );
+        db.close();
+
+        return clients;
+    }
+
+    public List<InsuranceVO> getInsurances() {
+        Cursor c = db.getAllInsurences();
+        List<InsuranceVO> clients = new ArrayList<InsuranceVO>();
+        if ( c.moveToFirst() )
+            do {
+                InsuranceVO client = new InsuranceVO();
+                client.id = c.getInt(c.getColumnIndex(DataBase.credit_card_id));
+                client.insurer = c.getString(c.getColumnIndex(DataBase.key_insurer_name));
+                clients.add(client);
+            }
+            while (c.moveToNext() );
+        db.close();
+
+        return clients;
+    }
+
     public void updateSale( SaleVO sale ) {
 
         ContentValues values = new ContentValues();
@@ -120,6 +152,17 @@ public class DataController {
                 model.car.kilometers = ( c.getInt(c.getColumnIndex( DataBase.key_kilometers ) ) );
                 model.car.price = ( c.getInt(c.getColumnIndex( DataBase.key_price ) ) );
 
+               model.creditCard = new CreditCardVO();
+               model.creditCard.id = ( c.getInt(c.getColumnIndex( DataBase.credit_card_id ) ) );
+               model.creditCard.number = ( c.getInt(c.getColumnIndex( DataBase.key_number ) ) );
+               model.creditCard.serviceCompany = ( c.getString(c.getColumnIndex( DataBase.key_services_company ) ) );
+               model.creditCard.expirationDate = new Date ( c.getLong(c.getColumnIndex( DataBase.key_expiration ) ) );
+
+               model.insuranceType = new InsuranceVO();
+               model.insuranceType.id = ( c.getInt(c.getColumnIndex( DataBase.insurance_id ) ) );
+               model.insuranceType.insurer = ( c.getString(c.getColumnIndex( DataBase.key_insurer_name ) ) );
+               model.insuranceType.value = ( c.getInt(c.getColumnIndex( DataBase.key_insurance_value ) ) );
+
                 allContacts.add( model);
             }
             while ( c.moveToNext() );
@@ -162,6 +205,21 @@ public class DataController {
         db.addCar( values );
     }
 
+    public void addCreditCard(CreditCardVO vo) {
+        ContentValues values = new ContentValues();
+        values.put( DataBase.key_services_company, vo.serviceCompany );
+        values.put( DataBase.key_number, vo.number );
+        values.put( DataBase.key_expiration, vo.expirationDate.getTime());
+        db.addCreditCard( values );
+    }
+
+    public void addInsurance(InsuranceVO vo) {
+        ContentValues values = new ContentValues();
+        values.put( DataBase.key_insurer_name, vo.insurer );
+        values.put( DataBase.key_insurance_value, vo.value );
+        db.addInsurance( values );
+    }
+
     public void addSale(SaleVO vo) {
         ContentValues values = new ContentValues();
         values.put( DataBase.client_id, vo.client.id );
@@ -201,6 +259,17 @@ public class DataController {
                 sale.car.color = ( c.getString(c.getColumnIndex( DataBase.key_color ) ) );
                 sale.car.kilometers = ( c.getInt(c.getColumnIndex( DataBase.key_kilometers ) ) );
                 sale.car.price = ( c.getInt(c.getColumnIndex( DataBase.key_price ) ) );
+
+                sale.creditCard = new CreditCardVO();
+                sale.creditCard.id = ( c.getInt(c.getColumnIndex( DataBase.credit_card_id ) ) );
+                sale.creditCard.number = ( c.getInt(c.getColumnIndex( DataBase.key_number ) ) );
+                sale.creditCard.serviceCompany = ( c.getString(c.getColumnIndex( DataBase.key_services_company ) ) );
+                sale.creditCard.expirationDate = new Date ( c.getLong(c.getColumnIndex( DataBase.key_expiration ) ) );
+
+                sale.insuranceType = new InsuranceVO();
+                sale.insuranceType.id = ( c.getInt(c.getColumnIndex( DataBase.insurance_id ) ) );
+                sale.insuranceType.insurer = ( c.getString(c.getColumnIndex( DataBase.key_insurer_name ) ) );
+                sale.insuranceType.value = ( c.getInt(c.getColumnIndex( DataBase.key_insurance_value ) ) );
             }
             while ( c.moveToNext() );
 
@@ -287,6 +356,17 @@ public class DataController {
                 model.car.kilometers = ( c.getInt(c.getColumnIndex( DataBase.key_kilometers ) ) );
                 model.car.price = ( c.getInt(c.getColumnIndex( DataBase.key_price ) ) );
 
+                model.creditCard = new CreditCardVO();
+                model.creditCard.id = ( c.getInt(c.getColumnIndex( DataBase.credit_card_id ) ) );
+                model.creditCard.number = ( c.getInt(c.getColumnIndex( DataBase.key_number ) ) );
+                model.creditCard.serviceCompany = ( c.getString(c.getColumnIndex( DataBase.key_services_company ) ) );
+                model.creditCard.expirationDate = new Date ( c.getLong(c.getColumnIndex( DataBase.key_expiration ) ) );
+
+                model.insuranceType = new InsuranceVO();
+                model.insuranceType.id = ( c.getInt(c.getColumnIndex( DataBase.insurance_id ) ) );
+                model.insuranceType.insurer = ( c.getString(c.getColumnIndex( DataBase.key_insurer_name ) ) );
+                model.insuranceType.value = ( c.getInt(c.getColumnIndex( DataBase.key_insurance_value ) ) );
+
                 models.add( model);
             }
             while ( c.moveToNext() );
@@ -327,6 +407,17 @@ public class DataController {
                 model.car.color = ( c.getString(c.getColumnIndex( DataBase.key_color ) ) );
                 model.car.kilometers = ( c.getInt(c.getColumnIndex( DataBase.key_kilometers ) ) );
                 model.car.price = ( c.getInt(c.getColumnIndex( DataBase.key_price ) ) );
+
+                model.creditCard = new CreditCardVO();
+                model.creditCard.id = ( c.getInt(c.getColumnIndex( DataBase.credit_card_id ) ) );
+                model.creditCard.number = ( c.getInt(c.getColumnIndex( DataBase.key_number ) ) );
+                model.creditCard.serviceCompany = ( c.getString(c.getColumnIndex( DataBase.key_services_company ) ) );
+                model.creditCard.expirationDate = new Date ( c.getLong(c.getColumnIndex( DataBase.key_expiration ) ) );
+
+                model.insuranceType = new InsuranceVO();
+                model.insuranceType.id = ( c.getInt(c.getColumnIndex( DataBase.insurance_id ) ) );
+                model.insuranceType.insurer = ( c.getString(c.getColumnIndex( DataBase.key_insurer_name ) ) );
+                model.insuranceType.value = ( c.getInt(c.getColumnIndex( DataBase.key_insurance_value ) ) );
 
                 models.add( model);
             }

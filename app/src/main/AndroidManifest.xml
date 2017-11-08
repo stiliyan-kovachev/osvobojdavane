@@ -60,6 +60,14 @@
         <activity
             android:name=".BoghtCarsByClientActivity"
             android:label="@string/title_activity_boght_cars_by_client"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".AddCreditcardActivity"
+            android:label="@string/title_activity_add_creditcard"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".AddInsuranceActivity"
+            android:label="@string/title_activity_add_insurance"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

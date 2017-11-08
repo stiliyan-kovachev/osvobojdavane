@@ -13,6 +13,8 @@ public class DataBase extends SQLiteOpenHelper {
     private static final String client_table_name = "client";
     private static final String customer_table_name = "customer";
     private static final String car_table_name = "car";
+    private static final String credit_card_name = "creditcard";
+    private static final String insurance_name = "insurance";
     private static final String sale_table_name = "sale";
 
     private static final int table_version    = 1;
@@ -32,6 +34,13 @@ public class DataBase extends SQLiteOpenHelper {
     public  static  final String key_color     = "color";
     public  static  final String key_kilometers     = "kilometers";
     public  static  final String key_price     = "price";
+    public  static  final String credit_card_id     = "creditcard_id";
+    public  static  final String key_services_company     = "services";
+    public  static  final String key_number     = "number";
+    public  static  final String key_expiration     = "expiration";
+    public  static  final String insurance_id     = "insurance_id";
+    public  static  final String key_insurer_name     = "in_name";
+    public  static  final String key_insurance_value     = "value";
     public  static  final String sale_id     = "sale_id";
     public  static  final String key_saledate   = "saldate";
 
@@ -57,6 +66,18 @@ public class DataBase extends SQLiteOpenHelper {
     public void addCar(ContentValues client) {
         open();
         db.insert(car_table_name, null, client );
+        close();
+    }
+
+    public void addCreditCard(ContentValues card) {
+        open();
+        db.insert(credit_card_name, null, card );
+        close();
+    }
+
+    public void addInsurance(ContentValues insurance) {
+        open();
+        db.insert(insurance_name, null, insurance );
         close();
     }
 
@@ -103,6 +124,30 @@ public class DataBase extends SQLiteOpenHelper {
         open();
 
         Cursor cursor =  db.query(car_table_name, new String[]{car_id, key_brand},null, null, null, null, null );
+
+//        close();
+
+        return  cursor;
+
+    }
+
+    public Cursor getAllCrediCards()
+    {
+        open();
+
+        Cursor cursor =  db.query(credit_card_name, new String[]{credit_card_id, key_number},null, null, null, null, null );
+
+//        close();
+
+        return  cursor;
+
+    }
+
+    public Cursor getAllInsurences()
+    {
+        open();
+
+        Cursor cursor =  db.query(insurance_name, new String[]{insurance_id, key_insurer_name},null, null, null, null, null );
 
 //        close();
 
@@ -218,14 +263,30 @@ public class DataBase extends SQLiteOpenHelper {
                 key_price + " integer, " +
                 key_color + " text not null " + ");");
 
+        db.execSQL("create table "+ credit_card_name + " (" +
+                credit_card_id + " integer primary key autoincrement," +
+                key_services_company + " text not null, " +
+                key_number + " integer, " +
+                key_expiration + " long " + ");");
+
+        db.execSQL("create table "+ insurance_name + " (" +
+                insurance_id + " integer primary key autoincrement," +
+                key_insurer_name + " text not null, " +
+                key_insurance_value + " integer " + ");");
+
         db.execSQL("create table "+ sale_table_name + " (" +
                 sale_id + " integer primary key autoincrement," +
                 client_id + " integer, " +
                 customer_id + " integer, " +
+                car_id + " integer, " +
+                credit_card_id + " integer, " +
+                insurance_id + " integer, " +
                 key_saledate + " long, " +
-                "FOREIGN KEY("+client_id+") REFERENCES "+client_table_name+"("+client_id+")" +
-                "FOREIGN KEY("+customer_id+") REFERENCES "+customer_table_name+"("+customer_id+")" +
-                "FOREIGN KEY("+car_id+") REFERENCES "+car_table_name+"("+car_id+")" +
+                "FOREIGN KEY("+client_id+") REFERENCES "+client_table_name+"("+client_id+") " +
+                "FOREIGN KEY("+customer_id+") REFERENCES "+customer_table_name+"("+customer_id+") " +
+                "FOREIGN KEY("+car_id+") REFERENCES "+car_table_name+"("+car_id+") " +
+                "FOREIGN KEY("+credit_card_id+") REFERENCES "+credit_card_name+"("+credit_card_id+") " +
+                "FOREIGN KEY("+insurance_id+") REFERENCES "+insurance_name+"("+insurance_id+") " +
                 ");");
     }
 

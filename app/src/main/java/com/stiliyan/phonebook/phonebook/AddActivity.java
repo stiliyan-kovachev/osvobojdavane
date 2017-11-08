@@ -14,6 +14,8 @@ public class AddActivity extends AppCompatActivity {
     private Button addClientBtn;
     private Button addCustomerBtn;
     private Button addCarBtn;
+    private Button addCreditCard;
+    private Button addInsurance;
     private Button addSaleBtn;
 
     @Override
@@ -24,6 +26,8 @@ public class AddActivity extends AppCompatActivity {
         addClientBtn = ( Button ) findViewById( R.id.addClient );
         addCustomerBtn = ( Button ) findViewById( R.id.addCustomer );
         addCarBtn = ( Button ) findViewById( R.id.addCar );
+        addCreditCard = ( Button ) findViewById( R.id.addCreditCard );
+        addInsurance = ( Button ) findViewById( R.id.addInsurance );
         addSaleBtn = ( Button ) findViewById( R.id.addSale );
 
         addClientBtn.setOnClickListener(new View.OnClickListener() {
@@ -46,6 +50,22 @@ public class AddActivity extends AppCompatActivity {
             @Override
             public void onClick( View view ) {
                 Intent intent = new Intent( AddActivity.this, AddCarActivity.class );
+                startActivity( intent );
+            }
+        });
+
+        addCreditCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick( View view ) {
+                Intent intent = new Intent( AddActivity.this, AddCreditcardActivity.class );
+                startActivity( intent );
+            }
+        });
+
+        addInsurance.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick( View view ) {
+                Intent intent = new Intent( AddActivity.this, AddInsuranceActivity.class );
                 startActivity( intent );
             }
         });

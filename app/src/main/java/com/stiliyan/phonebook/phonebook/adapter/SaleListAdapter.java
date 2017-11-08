@@ -48,6 +48,11 @@ public class SaleListAdapter extends ArrayAdapter<SaleVO> {
             TextView carColor = ( TextView ) v.findViewById(R.id.car_color);
             TextView carKilometers = ( TextView ) v.findViewById(R.id.car_kilometers);
             TextView carPrice = ( TextView ) v.findViewById(R.id.car_price);
+            TextView creditcardCompany = ( TextView ) v.findViewById(R.id.creditCard_company);
+            TextView creditcardNumber = ( TextView ) v.findViewById(R.id.creditCard_number);
+            TextView creditcardExpiration = ( TextView ) v.findViewById(R.id.creditCard_expiration);
+            TextView insuranceName = ( TextView ) v.findViewById(R.id.insurance_name);
+            TextView insuranceValue = ( TextView ) v.findViewById(R.id.insurance_value);
 
             if (saleDate != null) {
                 saleDate.setText( p.saledate.toString() );
@@ -87,6 +92,21 @@ public class SaleListAdapter extends ArrayAdapter<SaleVO> {
             }
             if (carPrice != null) {
                 carPrice.setText( String.valueOf(p.car.price) );
+            }
+            if (creditcardCompany != null) {
+                creditcardCompany.setText( p.creditCard.serviceCompany );
+            }
+            if (creditcardNumber != null) {
+                creditcardNumber.setText( String.valueOf( p.creditCard.number ) );
+            }
+            if (creditcardExpiration != null) {
+                creditcardExpiration.setText( p.creditCard.expirationDate.toString() );
+            }
+            if (insuranceName != null) {
+                insuranceName.setText( p.insuranceType.insurer );
+            }
+            if (insuranceValue != null) {
+                insuranceValue.setText( String.valueOf( p.insuranceType.value ) );
             }
 
         }
