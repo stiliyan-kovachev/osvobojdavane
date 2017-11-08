@@ -116,6 +116,8 @@ public class DataController {
         values.put( DataBase.client_id, sale.client.id );
         values.put( DataBase.customer_id, sale.customer.id );
         values.put( DataBase.car_id, sale.car.id );
+        values.put( DataBase.credit_card_id, sale.creditCard.id );
+        values.put( DataBase.insurance_id, sale.insuranceType.id );
 
         db.updateSale( sale.id, values );
     }
@@ -226,6 +228,8 @@ public class DataController {
         values.put( DataBase.customer_id, vo.customer.id );
         values.put( DataBase.car_id, vo.car.id);
         values.put( DataBase.key_saledate, vo.saledate.getTime());
+        values.put( DataBase.credit_card_id, vo.creditCard.id );
+        values.put( DataBase.insurance_id, vo.insuranceType.id );
         db.addSale( values );
     }
 
