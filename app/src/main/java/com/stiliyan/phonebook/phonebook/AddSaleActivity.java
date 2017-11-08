@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.stiliyan.phonebook.phonebook.data.CarVO;
@@ -14,6 +15,7 @@ import com.stiliyan.phonebook.phonebook.data.ClientVO;
 import com.stiliyan.phonebook.phonebook.data.CustomerVO;
 import com.stiliyan.phonebook.phonebook.data.DataController;
 import com.stiliyan.phonebook.phonebook.data.SaleVO;
+import com.stiliyan.phonebook.phonebook.utils.DatePickerFragment;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -25,6 +27,10 @@ public class AddSaleActivity extends AppCompatActivity {
     private Spinner customers;
     private Spinner cars;
     private Button confirm;
+    private Button saleDateBtn;
+    private TextView saleTW;
+
+    private Date saleDate;
 
     private List<ClientVO> clientsList;
     private List<CustomerVO> customersList;
@@ -39,6 +45,8 @@ public class AddSaleActivity extends AppCompatActivity {
         customers = (Spinner) findViewById(R.id.customers);
         cars = (Spinner) findViewById(R.id.cars);
         confirm = (Button) findViewById(R.id.confirm);
+        saleDateBtn = (Button) findViewById(R.id.sale_date_calendar);
+        saleTW = (TextView) findViewById(R.id.sale_date_tw);
 
         clientsList = DataController.getInstance().getClients();
         customersList = DataController.getInstance().getCustomers();
@@ -79,6 +87,21 @@ public class AddSaleActivity extends AppCompatActivity {
                 saveContact();
             }
         });
+
+        saleDateBtn.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick( View view ) {
+                DatePickerFragment newFragment = new DatePickerFragment();
+                newFragment.show(getSupportFragmentManager(), "datePicker");
+                newFragment.setTmeCallback(new SalesForPeriodActivity.TimeSet() {
+                    @Override
+                    public void onTimeSet(Date date) {
+                        saleTW.setText( date.toString());
+                        saleDate = date;
+                    }
+                });
+            }
+        });
     }
 
     private void saveContact(){
@@ -97,13 +120,20 @@ public class AddSaleActivity extends AppCompatActivity {
             Toast.makeText(this,"invalid car", Toast.LENGTH_SHORT).show();
             return;
         }
+        if ( saleDate == null )
+        {
+            saleTW.setError( "please select sale date");
+            return;
+        }
+        else
+            saleTW.setError( null );
 
         SaleVO sale = new SaleVO();
         sale.client = clientsList.get(clients.getSelectedItemPosition());
         sale.customer = customersList.get(customers.getSelectedItemPosition());
         sale.car = carsList.get(cars.getSelectedItemPosition());
 
-        sale.saledate = new Date(System.currentTimeMillis());
+        sale.saledate = saleDate;
 
         DataController.getInstance().addSale(sale);
         finish();

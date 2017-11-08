@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.stiliyan.phonebook.phonebook.adapter.ContactListAdapter;
 import com.stiliyan.phonebook.phonebook.data.DataController;
 import com.stiliyan.phonebook.phonebook.data.SaleVO;
+import com.stiliyan.phonebook.phonebook.utils.DatePickerFragment;
 
 import org.w3c.dom.Text;
 
@@ -103,39 +104,6 @@ public class SalesForPeriodActivity extends AppCompatActivity {
                 salesList.setAdapter( contactListAdapter );
             }
         });
-    }
-
-    public static class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
-        private TimeSet timeset;
-        @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
-            // Use the current date as the default date in the picker
-            final Calendar c = Calendar.getInstance();
-            int year = c.get(Calendar.YEAR);
-            int month = c.get(Calendar.MONTH);
-            int day = c.get(Calendar.DAY_OF_MONTH);
-
-            // Create a new instance of DatePickerDialog and return it
-            return new DatePickerDialog(getActivity(), this, year, month, day);
-        }
-
-
-        public void setTmeCallback(TimeSet timeset)
-        {
-            this.timeset = timeset;
-        }
-        public void onDateSet(DatePicker view, int year, int month, int day) {
-            // Do something with the date chosen by the user
-
-            if ( timeset != null )
-            {
-                Calendar cal = Calendar.getInstance();
-                cal.set(Calendar.YEAR, year);
-                cal.set(Calendar.MONTH, month);
-                cal.set(Calendar.DAY_OF_MONTH, day);
-                timeset.onTimeSet( cal.getTime() );
-            }
-        }
     }
 
     public interface TimeSet

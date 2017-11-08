@@ -178,7 +178,8 @@ public class DataController {
         if ( c.moveToFirst() )
             do {
                 sale.id =  ( c.getInt(c.getColumnIndex( DataBase.sale_id) ) );
-                sale.saledate = new Date( ( c.getLong(c.getColumnIndex( DataBase.key_saledate) ) ) );
+                long date = ( c.getLong(c.getColumnIndex( DataBase.key_saledate) ) );
+                sale.saledate = new Date( date );
 
                 sale.client = new ClientVO();
                 sale.client.id = ( c.getInt(c.getColumnIndex( DataBase.client_id ) ) );

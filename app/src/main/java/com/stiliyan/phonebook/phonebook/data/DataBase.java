@@ -130,11 +130,11 @@ public class DataBase extends SQLiteOpenHelper {
     {
         open();
 
-        Cursor cursor = db.rawQuery( "select " + "*" + " from " +sale_table_name +
+        Cursor cursor = db.rawQuery( "select * from (select " + "*" + " from " +sale_table_name +
                 " inner join " +client_table_name +" on " + sale_table_name +"."  + client_id + " = "+client_table_name +"." + client_id +
                 " inner join " +customer_table_name +" on " + sale_table_name +"."  + customer_id + " = "+customer_table_name +"." + customer_id +
                 " inner join " +car_table_name +" on " + sale_table_name +"."  + car_id + " = "+car_table_name +"." + car_id +
-                ";" + " where " + sale_id + " = " + id + ";", null );
+                ") where " + sale_id + " = " + id + ";", null );
 
 //        close();
 

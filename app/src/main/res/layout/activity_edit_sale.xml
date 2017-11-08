@@ -23,6 +23,24 @@
         android:layout_height="wrap_content">
     </Spinner>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/sale_date_calendar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="sale date"/>
+
+        <TextView
+            android:id="@+id/sale_date_tw"
+            android:text="00:00"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="23dp"/>
+    </LinearLayout>
+
     <Button
         android:id="@+id/confirm"
         android:layout_width="match_parent"
