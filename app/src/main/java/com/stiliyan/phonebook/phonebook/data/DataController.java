@@ -83,7 +83,7 @@ public class DataController {
             do {
                 CreditCardVO client = new CreditCardVO();
                 client.id = c.getInt(c.getColumnIndex(DataBase.credit_card_id));
-                client.number = c.getInt(c.getColumnIndex(DataBase.key_number));
+                client.number = c.getLong(c.getColumnIndex(DataBase.key_number));
                 clients.add(client);
             }
             while (c.moveToNext() );
@@ -156,7 +156,7 @@ public class DataController {
 
                model.creditCard = new CreditCardVO();
                model.creditCard.id = ( c.getInt(c.getColumnIndex( DataBase.credit_card_id ) ) );
-               model.creditCard.number = ( c.getInt(c.getColumnIndex( DataBase.key_number ) ) );
+               model.creditCard.number = ( c.getLong(c.getColumnIndex( DataBase.key_number ) ) );
                model.creditCard.serviceCompany = ( c.getString(c.getColumnIndex( DataBase.key_services_company ) ) );
                model.creditCard.expirationDate = new Date ( c.getLong(c.getColumnIndex( DataBase.key_expiration ) ) );
 
@@ -266,7 +266,7 @@ public class DataController {
 
                 sale.creditCard = new CreditCardVO();
                 sale.creditCard.id = ( c.getInt(c.getColumnIndex( DataBase.credit_card_id ) ) );
-                sale.creditCard.number = ( c.getInt(c.getColumnIndex( DataBase.key_number ) ) );
+                sale.creditCard.number = ( c.getLong(c.getColumnIndex( DataBase.key_number ) ) );
                 sale.creditCard.serviceCompany = ( c.getString(c.getColumnIndex( DataBase.key_services_company ) ) );
                 sale.creditCard.expirationDate = new Date ( c.getLong(c.getColumnIndex( DataBase.key_expiration ) ) );
 
@@ -437,7 +437,7 @@ public class DataController {
 
                 model.creditCard = new CreditCardVO();
                 model.creditCard.id = ( c.getInt(c.getColumnIndex( DataBase.credit_card_id ) ) );
-                model.creditCard.number = ( c.getInt(c.getColumnIndex( DataBase.key_number ) ) );
+                model.creditCard.number = ( c.getLong(c.getColumnIndex( DataBase.key_number ) ) );
                 model.creditCard.serviceCompany = ( c.getString(c.getColumnIndex( DataBase.key_services_company ) ) );
                 model.creditCard.expirationDate = new Date ( c.getLong(c.getColumnIndex( DataBase.key_expiration ) ) );
 

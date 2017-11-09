@@ -285,7 +285,7 @@ public class DataBase extends SQLiteOpenHelper {
         db.execSQL("create table "+ credit_card_name + " (" +
                 credit_card_id + " integer primary key autoincrement," +
                 key_services_company + " text not null, " +
-                key_number + " integer, " +
+                key_number + " long, " +
                 key_expiration + " long " + ");");
 
         db.execSQL("create table "+ insurance_name + " (" +

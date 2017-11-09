@@ -5,7 +5,7 @@ import java.util.Date;
 public class CreditCardVO {
     public int id;
     public String serviceCompany;
-    public int number;
+    public long number;
     public Date expirationDate;
 }
 

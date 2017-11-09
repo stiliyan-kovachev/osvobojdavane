@@ -69,7 +69,7 @@ public class AddCreditcardActivity extends AppCompatActivity {
             company.setError( "company required" );
             return;
         }
-        if (TextUtils.isEmpty(number.getText()) || !TextUtils.isDigitsOnly( number.getText()))
+        if (TextUtils.isEmpty(number.getText()) || !TextUtils.isDigitsOnly( number.getText()) || number.getText().length() > 16 )
         {
             number.setError( "invalid number" );
             return;
@@ -84,7 +84,7 @@ public class AddCreditcardActivity extends AppCompatActivity {
 
         CreditCardVO model = new CreditCardVO();
         model.serviceCompany = company.getText().toString();
-        model.number = Integer.valueOf( number.getText().toString());
+        model.number = Long.valueOf( number.getText().toString());
         model.expirationDate = expDate;
 
         DataController.getInstance().addCreditCard( model );
